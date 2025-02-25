@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 INPUT 1 OUTPUT TEMPLATE</title>
+    <style>
+
+        /* STYLE FOR THE INPUT FIELD */
+        #charInput {
+
+        }
+
+        /* STYLE FOR THE SUBMIT BUTTON */
+        #submitButton {
+
+        }
+
+        /* STYLE FOR THE IMAGE */
+        #displayedImage {
+            display: none; /* This line is mandatory */
+        }
+    </style>
+</head>
+<body>
+
+    <p>enter a letter from A-Z for a dog</p>
+
+    <!-- INPUT FIELD FOR 1 CHARACTER -->
+    <input type="text" id="charInput" maxlength="1">
+
+    <!-- BUTTON TO DISPLAY IMAGE -->
+    <button onclick="displayImage()" id="submitButton">Show Image</button>
+
+    <!-- IMAGE TO DISPLAY -->
+    <img id="displayedImage" src="" alt="Displayed Image">
+
+
+    <!-- Image Display Script Below -->
+    <script>
+        // Array of images
+        // DIRECTIONS: UPDATE THE URLS WITH THE RELATIVE LINKS OF YOUR IMAGES
+        const images = [
+            "https://preciouspupsusa.com/cdn/shop/products/A0AA0C0D-E535-4D73-A1F3-A028C0DCC409_2048x.jpg?v=1667252547", //A
+            "https://cdn.britannica.com/80/232780-050-404D6708/Pembroke-welsh-corgi-dog.jpg", //B
+            "https://cdn-prd.content.metamorphosis.com/wp-content/uploads/sites/2/2020/10/shutterstock_351316526-2.jpg", //C
+            "https://cdn.britannica.com/69/234469-050-B883797B/Rottweiler-dog.jpg", //D
+            "https://www.animalbehaviorcollege.com/wp-content/uploads/2015/05/chihuahua.jpg", //E
+            "https://www.ellevetsciences.com/wp-content/uploads/2022/07/ev-blog-huskies-header.jpg", //F
+            "https://d128mjo55rz53e.cloudfront.net/media/images/blog-breed-french_pomeranian_1_1.max-500x500.format-jpeg.jpg", //G
+            "https://cdn.britannica.com/07/234207-050-0037B589/English-bulldog-dog.jpg", //H
+            "https://pet-health-content-media.chewy.com/wp-content/uploads/2024/09/11170806/202106Havanese-FeaturedImage.jpg", //I
+            "https://pet-health-content-media.chewy.com/wp-content/uploads/2024/09/11180014/202105German-Shepherd-1358309706-scaled-1.jpg", //J
+            "https://www.akc.org/wp-content/uploads/2021/01/Beagle-puppy-standing-in-the-grass-1-500x486.jpeg", //K
+            "https://www.dogster.com/wp-content/uploads/2024/03/dapple-dachshund-portrait_Liliya-Kulianionak_Shutterstock.jpg", //L
+            "https://a-z-animals.com/media/2022/03/dog-food-for-great-danes-header.jpg", //M
+            "https://americannaturalpremium.com/wp-content/uploads/2024/02/AdobeStock_112207019-scaled.jpeg", //N
+            "https://cdn.britannica.com/85/235885-050-C8CC6D8B/Samoyed-dog-standing-snow.jpg", //O
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-586890581.jpg?crop=0.668xw:1.00xh;0.219xw,0&resize=980:*", //P
+            "https://hips.hearstapps.com/hmg-prod/images/view-of-french-bulldog-standing-on-grass-royalty-free-image-1686889382.jpg?crop=0.716xw:1.00xh;0.199xw,0&resize=980:*", //Q
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-185286104.jpg?crop=0.668xw:1.00xh;0,0&resize=980:*", //R
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-128105326.jpg?crop=1.00xw:0.667xh;0,0.0420xh&resize=980:*", //S
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-108203703.jpg?crop=0.668xw:1.00xh;0.131xw,0&resize=980:*", //T
+            "https://pet-health-content-media.chewy.com/wp-content/uploads/2024/09/11181052/202104doberman-pinscher-red.jpg", //U
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-154260976.jpg?crop=1.00xw:0.667xh;0,0.129xh&resize=980:*", //V
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-488587375.jpg?crop=0.6667605633802817xw:1xh;center,top&resize=980:*", //W
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-551994223.jpg?crop=0.665xw:1.00xh;0.252xw,0&resize=980:*", //X
+            "https://hips.hearstapps.com/clv.h-cdn.co/assets/16/18/gettyimages-128608383.jpg?crop=0.7445219123505976xw:1xh;center,top&resize=980:*", //Y
+            "https://hips.hearstapps.com/hmg-prod/images/walking-shih-tzu-royalty-free-image-1686913381.jpg?crop=0.668xw:1.00xh;0.175xw,0&resize=980:*"  //Z
+        ];
+
+        function displayImage() {
+            const input = document.getElementById("charInput").value.toUpperCase();
+            const imgElement = document.getElementById("displayedImage");
+            
+            // Assign an image based on character (A-Z)
+            const index = input.charCodeAt(0) - 65; // 'A' is 65 in ASCII
+            if (index >= 0 && index < images.length) {
+                imgElement.src = images[index];
+                imgElement.style.display = "block";
+            } else {
+                /* 
+                alert("Please enter a letter between A and Z.");
+                imgElement.style.display = "none";
+                */
+
+                // IF INVALID INPUT IS ENTERED, DISPLAY ALTERNATE IMAGE
+                imgElement.src = "https://media.istockphoto.com/id/1131230925/vector/check-marks-red-cross-icon-simple-vector.jpg?s=612x612&w=0&k=20&c=8oNof6faYkfOn1O6CAOHwpSmAhq3IK9hY_D3icbaQps="
+                imgElement.style.display = "block";
+            }
+        }
+        const index = input.charCodeAt(0) - 65; // 'A' is 65 in ASCII
+            if (index >= 0 && index < images.length) {
+                imgElement.src = images[index];
+                imgElement.style.display = "block";
+            } else {
+                imgElement.src = A;
+                imgElement.style.display = "none";
+
+                imgElement.src = B;
+                imgElement.style.display = "none";
+
+                imgElement.src = C;
+                imgElement.style.display = "none";
+
+                imgElement.src = D;
+                imgElement.style.display = "none";
+
+                imgElement.src = E;
+                imgElement.style.display = "none";
+
+                imgElement.src = F;
+                imgElement.style.display = "none";
+
+                imgElement.src = G;
+                imgElement.style.display = "none";
+
+                imgElement.src = H;
+                imgElement.style.display = "none";
+
+                imgElement.src = I;
+                imgElement.style.display = "none";
+
+                imgElement.src = J;
+                imgElement.style.display = "none";
+
+                imgElement.src = K;
+                imgElement.style.display = "none";
+
+                imgElement.src = L;
+                imgElement.style.display = "none";
+
+                imgElement.src = M;
+                imgElement.style.display = "none";
+
+                imgElement.src = N;
+                imgElement.style.display = "none";
+
+                imgElement.src = O;
+                imgElement.style.display = "none";
+
+                imgElement.src = P;
+                imgElement.style.display = "none";
+
+                imgElement.src = Q;
+                imgElement.style.display = "none";
+
+                imgElement.src = R;
+                imgElement.style.display = "none";
+
+                imgElement.src = S;
+                imgElement.style.display = "none";
+
+                imgElement.src = T;
+                imgElement.style.display = "none";
+
+                imgElement.src = U;
+                imgElement.style.display = "none";
+
+                imgElement.src = V;
+                imgElement.style.display = "none";
+
+                imgElement.src = W;
+                imgElement.style.display = "none";
+
+                imgElement.src = X;
+                imgElement.style.display = "none";
+
+                imgElement.src = Y;
+                imgElement.style.display = "none";
+
+                imgElement.src = Z;
+                imgElement.style.display = "none";
+            }
+    </script>
+
+</body>
+</html>
